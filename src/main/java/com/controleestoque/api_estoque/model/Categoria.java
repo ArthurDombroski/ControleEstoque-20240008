@@ -1,4 +1,4 @@
-package com.controleestoque.api_estoque;
+package com.controleestoque.api_estoque.model;
 
 import jakarta.persistence.*;
 import java.util.List;
