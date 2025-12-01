@@ -8,7 +8,7 @@ import com.controleestoque.api_estoque.model.Produto;
 import java.util.List;
 
 @Repository
-public interface CategoriaRepository extends JpaRepository<Fornecedor, Long> {
+public interface FornecedorRepository extends JpaRepository<Fornecedor, Long> {
     List<Fornecedor> findByNome (String nome);
     List<Fornecedor> findByNomeContaining (String parteDoNome);
 }
