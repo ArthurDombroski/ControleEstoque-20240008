@@ -58,7 +58,7 @@ public class Produto {
         public String getNome() {
             return nome;
         }
-        public void setNome() {
+        public void setNome(String nome) {
             this.nome = nome;
         }
 
