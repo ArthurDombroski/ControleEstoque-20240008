@@ -1,7 +1,7 @@
 package com.controleestoque.api_estoque.model;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.*;
 
 import jakarta.persistence.*;
 
@@ -30,9 +30,11 @@ public class ItemVenda {
 
     }
 
-    public ItemVenda(Integer quantItens, BigDecimal precoUnitario) {
+    public ItemVenda(Integer quantItens, BigDecimal precoUnitario, Produto produto, Venda venda) {
         this.quantItens = quantItens;
         this.precoUnitario = precoUnitario;
+        this.produto = produto;
+        this.venda = venda;
     }
 
     public Long getId() {
@@ -58,8 +60,6 @@ public class ItemVenda {
     public void setVenda(Venda venda) {
         this.venda = venda;
     }
-
-    
 
     public Produto getProduto() {
         return produto;

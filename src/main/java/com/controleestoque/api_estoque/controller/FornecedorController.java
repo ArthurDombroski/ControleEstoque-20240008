@@ -25,7 +25,7 @@ public class FornecedorController {
     }
 
     //Get Id
-    @GetMapping("{/id")
+    @GetMapping("{/id}")
     public ResponseEntity<Fornecedor> getCategoriaByID(@PathVariable Long id){
         return fornecedorRepository.findById(id)
             .map(ResponseEntity::ok)

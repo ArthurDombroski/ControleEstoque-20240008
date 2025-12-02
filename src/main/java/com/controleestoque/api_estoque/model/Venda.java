@@ -66,11 +66,11 @@ public class Venda {
         this.vendedor = vendedor;
     }
 
-    public List<ItemVenda> getitens() {
+    public List<ItemVenda> getItens() {
         return itens;
     }
 
-    public void setitens(List<ItemVenda> itens) {
+    public void setItens(List<ItemVenda> itens) {
         this.itens = itens;
     }
 
