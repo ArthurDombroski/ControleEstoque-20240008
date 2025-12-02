@@ -15,6 +15,8 @@ public class ItemVenda {
     private Long id;
 
     private Integer quantItens;
+    private BigDecimal precoUnitario;
+
 
     @ManyToOne
     @JoinColumn(name = "venda_id", nullable = false)
@@ -28,8 +30,9 @@ public class ItemVenda {
 
     }
 
-    public ItemVenda(Integer quantItens) {
+    public ItemVenda(Integer quantItens, BigDecimal precoUnitario) {
         this.quantItens = quantItens;
+        this.precoUnitario = precoUnitario;
     }
 
     public Long getId() {
@@ -56,12 +59,22 @@ public class ItemVenda {
         this.venda = venda;
     }
 
+    
+
     public Produto getProduto() {
         return produto;
     }
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+
+    public BigDecimal getPrecoUnitario() {
+        return precoUnitario;
+    }
+
+    public void setPrecoUnitario(BigDecimal precoUnitario) {
+        this.precoUnitario = precoUnitario;
     }
 
     
