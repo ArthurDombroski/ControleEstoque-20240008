@@ -39,6 +39,7 @@ public class ClienteController {
     }
 
     // Put
+    @PutMapping("/{id}")
     public ResponseEntity<Cliente> updateCliente(
         @PathVariable Long id, @RequestBody Cliente clienteDetails){
         return clienteRepository.findById(id)
