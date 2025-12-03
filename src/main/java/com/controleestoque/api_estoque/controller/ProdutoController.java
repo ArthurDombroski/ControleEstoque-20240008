@@ -2,15 +2,22 @@ package com.controleestoque.api_estoque.controller;
 
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
-import org.springframework.http.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.controleestoque.api_estoque.model.Produto;
-import com.controleestoque.api_estoque.repository.ProdutoRepository;
-
 import com.controleestoque.api_estoque.repository.CategoriaRepository;
 import com.controleestoque.api_estoque.repository.FornecedorRepository;
+import com.controleestoque.api_estoque.repository.ProdutoRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -44,16 +51,25 @@ public class ProdutoController {
         if (produto.getCategoria() == null || produto.getCategoria().getId() == null) {
             return ResponseEntity.badRequest().build();
         }
+        
+        // Busca a categoria completa do banco
         categoriaRepository.findById(produto.getCategoria().getId())
                 .ifPresent(produto::setCategoria);
 
+        // Busca os fornecedores completos do banco
         if (produto.getFornecedores() != null && !produto.getFornecedores().isEmpty()) {
+            var fornecedoresIds = produto.getFornecedores().stream()
+                    .map(f -> f.getId())
+                    .toList();
+            
+            var fornecedoresCompletos = fornecedorRepository.findAllById(fornecedoresIds);
             produto.getFornecedores().clear();
+            produto.getFornecedores().addAll(fornecedoresCompletos);
+        }
 
-            produto.getFornecedores().forEach(fornecedor -> {
-                fornecedorRepository.findById(fornecedor.getId())
-                        .ifPresent(produto.getFornecedores()::add);
-            });
+        // Configura o relacionamento bidirecional com Estoque
+        if (produto.getEstoque() != null) {
+            produto.getEstoque().setProduto(produto);
         }
 
         Produto savedProduto = produtoRepository.save(produto);

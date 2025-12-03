@@ -3,7 +3,20 @@ package com.controleestoque.api_estoque.model;
 import java.math.BigDecimal; // import para um tipo de dado no BD
 import java.util.Set;
 
-import jakarta.persistence.*; // import para anotações JPA
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity; // import para anotações JPA
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity // Define a classe como uma entidade JPA
 @Table(name = "tb_produtos") // Mapeia a entidade para a tabela "tb_produtos"
@@ -20,11 +33,12 @@ public class Produto {
 
 
     //Relacionamento com Estoque
-    @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true) //orphanRemoval apaga automaticamente do banco os filhos que forem removidos da coleção do pai.
+    @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER) //orphanRemoval apaga automaticamente do banco os filhos que forem removidos da coleção do pai.
+    @JsonManagedReference
     private Estoque estoque;
 
     //Relacionamento com Categoria
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 

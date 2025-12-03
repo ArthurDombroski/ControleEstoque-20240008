@@ -1,7 +1,16 @@
 package com.controleestoque.api_estoque.model;
 
-import jakarta.persistence.*;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_categorias")
@@ -16,6 +25,7 @@ public class Categoria {
     //Relacionamento 1:N (Um para Muitos)
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Produto> produtos;
 
     public Categoria() {
@@ -23,7 +33,6 @@ public class Categoria {
 
     public Categoria(String nome) {
         this.nome = nome;
-        this.produtos = produtos;
     }
 
     public Long getId() {

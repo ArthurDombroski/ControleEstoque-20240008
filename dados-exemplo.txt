@@ -1,0 +1,314 @@
+===========================================
+DADOS DE EXEMPLO PARA API DE ESTOQUE
+===========================================
+
+=== 1. CATEGORIAS ===
+POST http://localhost:8080/api/categorias
+
+{
+  "nome": "Eletrônicos"
+}
+
+{
+  "nome": "Alimentos"
+}
+
+{
+  "nome": "Bebidas"
+}
+
+{
+  "nome": "Limpeza"
+}
+
+{
+  "nome": "Higiene"
+}
+
+
+=== 2. FORNECEDORES ===
+POST http://localhost:8080/api/fornecedores
+
+{
+  "nome": "Tech Distribuidora LTDA"
+}
+
+{
+  "nome": "Alimentos Brasil S.A."
+}
+
+{
+  "nome": "Bebidas Premium"
+}
+
+{
+  "nome": "Limpeza Total"
+}
+
+
+=== 3. PRODUTOS (com Estoque) ===
+POST http://localhost:8080/api/produtos
+
+{
+  "nome": "Notebook Dell Inspiron",
+  "preco": 3500.00,
+  "categoria": {
+    "id": 1
+  },
+  "fornecedores": [
+    {
+      "id": 1
+    }
+  ],
+  "estoque": {
+    "quantidade": 15
+  }
+}
+
+{
+  "nome": "Mouse Logitech",
+  "preco": 89.90,
+  "categoria": {
+    "id": 1
+  },
+  "fornecedores": [
+    {
+      "id": 1
+    }
+  ],
+  "estoque": {
+    "quantidade": 50
+  }
+}
+
+{
+  "nome": "Arroz Integral 1kg",
+  "preco": 8.50,
+  "categoria": {
+    "id": 2
+  },
+  "fornecedores": [
+    {
+      "id": 2
+    }
+  ],
+  "estoque": {
+    "quantidade": 200
+  }
+}
+
+{
+  "nome": "Feijão Preto 1kg",
+  "preco": 7.90,
+  "categoria": {
+    "id": 2
+  },
+  "fornecedores": [
+    {
+      "id": 2
+    }
+  ],
+  "estoque": {
+    "quantidade": 150
+  }
+}
+
+{
+  "nome": "Refrigerante Cola 2L",
+  "preco": 6.50,
+  "categoria": {
+    "id": 3
+  },
+  "fornecedores": [
+    {
+      "id": 3
+    }
+  ],
+  "estoque": {
+    "quantidade": 100
+  }
+}
+
+{
+  "nome": "Suco de Laranja 1L",
+  "preco": 9.90,
+  "categoria": {
+    "id": 3
+  },
+  "fornecedores": [
+    {
+      "id": 3
+    }
+  ],
+  "estoque": {
+    "quantidade": 80
+  }
+}
+
+{
+  "nome": "Detergente Líquido 500ml",
+  "preco": 2.50,
+  "categoria": {
+    "id": 4
+  },
+  "fornecedores": [
+    {
+      "id": 4
+    }
+  ],
+  "estoque": {
+    "quantidade": 300
+  }
+}
+
+{
+  "nome": "Sabão em Pó 1kg",
+  "preco": 12.90,
+  "categoria": {
+    "id": 4
+  },
+  "fornecedores": [
+    {
+      "id": 4
+    }
+  ],
+  "estoque": {
+    "quantidade": 120
+  }
+}
+
+
+=== 4. CLIENTES ===
+POST http://localhost:8080/api/clientes
+
+{
+  "nome": "João Silva",
+  "email": "joao.silva@email.com",
+  "cep": "01310-100"
+}
+
+{
+  "nome": "Maria Santos",
+  "email": "maria.santos@email.com",
+  "cep": "04567-890"
+}
+
+{
+  "nome": "Pedro Oliveira",
+  "email": "pedro.oliveira@email.com",
+  "cep": "22041-001"
+}
+
+{
+  "nome": "Ana Costa",
+  "email": "ana.costa@email.com",
+  "cep": "30130-100"
+}
+
+
+=== 5. VENDEDORES ===
+POST http://localhost:8080/api/vendedores
+
+{
+  "nome": "Carlos Vendedor"
+}
+
+{
+  "nome": "Juliana Vendedora"
+}
+
+{
+  "nome": "Roberto Vendedor"
+}
+
+
+=== 6. VENDAS ===
+POST http://localhost:8080/api/vendas
+
+{
+  "clienteId": 1,
+  "vendedorId": 1,
+  "itens": [
+    {
+      "produtoId": 1,
+      "quantidade": 2
+    },
+    {
+      "produtoId": 2,
+      "quantidade": 3
+    }
+  ]
+}
+
+{
+  "clienteId": 2,
+  "vendedorId": 2,
+  "itens": [
+    {
+      "produtoId": 3,
+      "quantidade": 5
+    },
+    {
+      "produtoId": 4,
+      "quantidade": 3
+    },
+    {
+      "produtoId": 5,
+      "quantidade": 10
+    }
+  ]
+}
+
+{
+  "clienteId": 3,
+  "vendedorId": 1,
+  "itens": [
+    {
+      "produtoId": 7,
+      "quantidade": 20
+    },
+    {
+      "produtoId": 8,
+      "quantidade": 5
+    }
+  ]
+}
+
+{
+  "clienteId": 4,
+  "vendedorId": 3,
+  "itens": [
+    {
+      "produtoId": 6,
+      "quantidade": 12
+    }
+  ]
+}
+
+
+===========================================
+INSTRUÇÕES DE USO:
+===========================================
+
+1. Popule nesta ordem:
+   - Categorias
+   - Fornecedores
+   - Produtos (dependem de Categorias e Fornecedores)
+   - Clientes
+   - Vendedores
+   - Vendas (dependem de Clientes, Vendedores e Produtos)
+
+2. Use Postman, Insomnia ou curl para fazer as requisições
+
+3. Exemplo com curl:
+   curl -X POST http://localhost:8080/api/categorias \
+   -H "Content-Type: application/json" \
+   -d '{"nome": "Eletrônicos"}'
+
+4. Os IDs são gerados automaticamente, então ajuste os IDs
+   nas requisições conforme necessário
+
+5. O estoque é criado automaticamente quando você cria um produto
+   (relacionamento OneToOne com cascade)
+
+===========================================
